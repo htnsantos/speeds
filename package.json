@@ -5,10 +5,9 @@
     "node": "8.2.1"
   },
   "license": "MIT",
-  "main": "node Server.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node Server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
