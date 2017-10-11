@@ -1,0 +1,14 @@
+<div class="form-container">
+    <img src="assets/images/logo.jpeg" id="lock">
+    
+    <span class="error" *ngIf="error" [@fallIn]='state'>{{ error }}</span>
+
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+
+      <input type="text" placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
+      <input type="password" placeholder="Password" (ngModel)="password" name="password" class="txt" required>
+
+      <button type="submit" [disabled]="!formData.valid" class="basic-btn">Entrar</button>
+      <a routerLink="/signup" class="alc">Fazer Cadastro</a>
+  </form>
+</div>

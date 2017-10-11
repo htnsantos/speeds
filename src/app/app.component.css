@@ -1,0 +1,20 @@
+#logoheader {
+    float:left;
+    height: 50px;
+}
+
+.font-header {
+    background-color: rgb(64,124,202);
+}
+
+.font-menu {
+    color: rgb(33,25,21) !important;
+}
+
+.font-navheader {
+    margin-left: 3%;
+}
+
+.font-navheader > a {
+    font-size: 14px;
+}

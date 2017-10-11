@@ -1,0 +1,16 @@
+.font-chamados {
+    color: rgb(224,4,11);
+}
+
+.space-image {
+    padding-right: 6px;
+}
+
+.list-chamado {
+    color: black;
+}
+
+.list-chamado > :hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

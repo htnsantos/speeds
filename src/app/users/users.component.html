@@ -1,0 +1,52 @@
+<div class="container col-md-12">
+
+  <div class="user-container wrapper col-md-4">
+    <app-chamados-list></app-chamados-list>
+  </div>
+
+</div>
+
+<div class="col-md-8 pull-right cor-fundo-solicitacao">
+  
+  <div class="col-md-12 ">
+    <div class="row">
+      <label class="font-chamado-label"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao | date: 'dd/MM/yyyy hh:MM'}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Local de Retirada: </label> <a class="font-chamado-value">{{chamado.local_retirada}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Local de Destino: </label> <a class="font-chamado-value">{{chamado.local_destino}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Orçamento: </label> <a class="font-chamado-value">{{chamado.orcamento | currency:'USD':true:'1.2-2'}}</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <img src="{{ chamado.picture }}" />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row">
+        <app-map></app-map>
+      </div>
+    </div>
+
+    <form #formCadastro='ngForm' (ngSubmit)="onSubmit(formCadastro)">
+    <div class="col-md-12">
+      <div class="col-md-3">
+    <button type="submit" [disabled]="!formCadastro.valid" class="btn btn-danger">Cancelar</button>
+      </div>
+    <div class="col-md-3">
+    <button type="submit" [disabled]="!formCadastro.valid" class="btn btn-primary">Direcionar</button>
+    </div>
+    </div>
+
+  </form>
+  </div>
