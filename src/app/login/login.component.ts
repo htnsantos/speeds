@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
 
   error: any;
   user: Observable<firebase.User>;
+  email: any;
+  password: any;
+  
   constructor(public afAuth: AngularFireAuth, private router: Router, private authGuard : AuthGuard) {
 
     firebase.auth().onAuthStateChanged(user => {
