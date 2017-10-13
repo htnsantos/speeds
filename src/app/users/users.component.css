@@ -32,11 +32,21 @@ h2 {
     height: 100%;
 }
 
+.row {
+    margin-left: 0px !important;
+}
 
+.dist-solicitante {
+    padding-left: 1.7%;
+}
 .cor-fundo-solicitacao {
     background: white;
     height: 100%;
     margin-top: -1px;
+}
+
+.margin-botoes {
+    margin-top: 3%;
 }
 
 .font-chamado-label {
@@ -45,12 +55,21 @@ h2 {
 
 .font-chamado-value {
     font-size: 14px;
-    color: black
+    color: black;
+    text-decoration: none;
+    cursor:auto;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+
+.info-mapTable {
+    padding-top: 3%;
 }
 
 .container-right {
     float: right;
     height: 100%;
+    position:fixed;
     background: white;
 }
 .scroll-down {
@@ -80,6 +99,7 @@ h2 {
 
 .wrapper {
     padding-top: 2%;
+    border-right: #f8f8f8 2px solid
 }
 
 @media(max-width:992px){

@@ -20,8 +20,6 @@ import { auth } from "firebase/app";
 export class LoginComponent implements OnInit {
 
   error: any;
-  email: any;
-  password: any;
   user: Observable<firebase.User>;
   constructor(public afAuth: AngularFireAuth, private router: Router, private authGuard : AuthGuard) {
 

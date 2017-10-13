@@ -6,15 +6,21 @@
 
 </div>
 
-<div class="col-md-8 pull-right cor-fundo-solicitacao">
+<div class="col-md-8 pull-right cor-fundo-solicitacao" >
   
   <div class="col-md-12 ">
     <div class="row">
-      <label class="font-chamado-label"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
+      <label class="font-chamado-label dist-solicitante"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
     </div>
     <div class="col-md-8">
       <div class="row">
         <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao | date: 'dd/MM/yyyy hh:MM'}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Tipo: </label> <a class="font-chamado-value">{{chamado.type}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Status: </label> <a class="font-chamado-value">{{chamado.status }}</a>
       </div>
       <div class="row">
         <label class="font-chamado-label"> Local de Retirada: </label> <a class="font-chamado-value">{{chamado.local_retirada}}</a>
@@ -32,21 +38,57 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-8 info-mapTable">
+        <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Observações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of chamado.condicoes; let i = index" [attr.data-index]="i">
+        <td>{{i + 1}}</td>
+        <td>{{c}}</td>
+      </tr>
+    </tbody>
+  </table>
+    </div> 
+
+    <div class="col-md-4 info-mapTable">
       <div class="row">
         <app-map></app-map>
       </div>
     </div>
 
-    <form #formCadastro='ngForm' (ngSubmit)="onSubmit(formCadastro)">
-    <div class="col-md-12">
+    <!--form #formCadastro='ngForm' (ngSubmit)="onSubmit(formCadastro)"-->
+    <div class="col-md-12 margin-botoes">
       <div class="col-md-3">
-    <button type="submit" [disabled]="!formCadastro.valid" class="btn btn-danger">Cancelar</button>
+    <button type="submit"  class="btn btn-danger" style="margin-bottom: 23%;">Cancelar</button>
       </div>
     <div class="col-md-3">
-    <button type="submit" [disabled]="!formCadastro.valid" class="btn btn-primary">Direcionar</button>
+    <button type="submit" class="btn btn-primary">Direcionar</button>
     </div>
     </div>
 
-  </form>
+  <!--/form-->
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>This is a large modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

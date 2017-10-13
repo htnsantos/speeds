@@ -10,7 +10,12 @@
     color: black;
 }
 
+.color-list {
+    background: #f8f8f8;
+}
+
 .list-chamado > :hover{
     text-decoration: underline;
     cursor: pointer;
 }
+
