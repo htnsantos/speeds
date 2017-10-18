@@ -1,3 +1,4 @@
+import { GraficoComponent } from './../../grafico/grafico.component';
 import { UsersComponent } from './../../users/users.component';
 import { Observable } from 'rxjs/Observable';
 import { Chamado } from './../../model/chamado';
@@ -13,12 +14,12 @@ import * as firebase from 'firebase/app';
   templateUrl: './chamados-list.component.html',
   styleUrls: ['./chamados-list.component.css']
 })
-export class ChamadosListComponent {
+export class ChamadosListComponent implements OnInit{
 
   chamados: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
 
-  constructor(private db: AngularFireDatabase, private user: UsersComponent) {
+  constructor(private db: AngularFireDatabase, private user: UsersComponent, private grafico: GraficoComponent) {
 
     this.size$ = new BehaviorSubject(null);
 
@@ -27,7 +28,7 @@ export class ChamadosListComponent {
         size ? ref.orderByChild('nome').equalTo(size) : ref
       ).valueChanges()
     );
-    console.log(this.chamados);
+        
   }
   filterBy(size: string | null) {
     this.size$.next(size);
@@ -35,6 +36,12 @@ export class ChamadosListComponent {
 
   chamadoSelecionado(chamado) {
     this.user.carregarSolicitacao(chamado);
+  }
+
+  ngOnInit() {
+    firebase.database().ref('Requests').on('value', snapshot => {
+    this.grafico.carregaGrafico(this.chamados);
+  })
   }
 }
 

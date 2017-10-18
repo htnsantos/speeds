@@ -6,9 +6,15 @@
 
 </div>
 
-<div class="col-md-8 pull-right cor-fundo-solicitacao" >
-  
-  <div class="col-md-12 ">
+<div class="col-md-8 pull-right cor-fundo-solicitacao font-grafico"  [hidden]="!showGraph">
+  <div class="col-md-12">
+    <app-grafico></app-grafico>
+  </div>
+</div>
+
+<div class="col-md-8 pull-right cor-fundo-solicitacao" [hidden]="showGraph">
+
+  <div class="col-md-12 info-chamado">
     <div class="row">
       <label class="font-chamado-label dist-solicitante"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
     </div>
@@ -32,28 +38,28 @@
         <label class="font-chamado-label"> Orçamento: </label> <a class="font-chamado-value">{{chamado.orcamento | currency:'USD':true:'1.2-2'}}</a>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 info-picture">
       <div class="row">
         <img src="{{ chamado.picture }}" />
       </div>
     </div>
 
-    <div class="col-md-8 info-mapTable">
-        <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Observações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of chamado.condicoes; let i = index" [attr.data-index]="i">
-        <td>{{i + 1}}</td>
-        <td>{{c}}</td>
-      </tr>
-    </tbody>
-  </table>
-    </div> 
+    <div class="col-md-8 info-mapTable table-responsive customScroll" >
+      <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of chamado.condicoes; let i = index" [attr.data-index]="i">
+            <td>{{i + 1}}</td>
+            <td>{{c}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="col-md-4 info-mapTable">
       <div class="row">
@@ -64,14 +70,14 @@
     <!--form #formCadastro='ngForm' (ngSubmit)="onSubmit(formCadastro)"-->
     <div class="col-md-12 margin-botoes">
       <div class="col-md-3">
-    <button type="submit"  class="btn btn-danger" style="margin-bottom: 23%;">Cancelar</button>
+        <button type="submit" class="btn btn-danger" style="margin-bottom: 23%;">Cancelar</button>
       </div>
-    <div class="col-md-3">
-    <button type="submit" class="btn btn-primary">Direcionar</button>
-    </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary">Direcionar</button>
+      </div>
     </div>
 
-  <!--/form-->
+    <!--/form-->
   </div>
 
   <!-- Modal -->

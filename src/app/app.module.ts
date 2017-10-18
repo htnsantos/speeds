@@ -12,6 +12,7 @@ import { AuthGuard } from './auth.service';
 import { routes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as $ from 'jquery';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +20,7 @@ import { SignupComponent } from './signup/signup.component';
 import { UsersComponent } from './users/users.component';
 import { ChamadosListComponent } from './chamados/chamados-list/chamados-list.component';
 import { MapComponent } from './map/map.component';
+import { GraficoComponent } from './grafico/grafico.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -38,7 +40,8 @@ export const firebaseConfig = {
     UsersComponent,
     ChamadosListComponent,
     GetImagePipe,
-    MapComponent
+    MapComponent,
+    GraficoComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +51,10 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     routes,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ChartsModule
   ],
-  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent],
+  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

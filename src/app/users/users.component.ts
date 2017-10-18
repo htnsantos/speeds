@@ -1,3 +1,4 @@
+import { GraficoComponent } from './../grafico/grafico.component';
 import { MapComponent } from './../map/map.component';
 import { ChamadosListComponent } from './../chamados/chamados-list/chamados-list.component';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -26,23 +27,34 @@ export class UsersComponent implements OnInit {
   state: string = '';
   chamados: Array<any>;
   chamado: Chamado = new Chamado();
+  showGraph: boolean = true;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, private authGuard: AuthGuard,
     private angularFire: AngularFireDatabase, private map: MapComponent) {
-    
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         this.name = user;
       }
-    });   
+    });
 
   }
 
   carregarSolicitacao(chamado) {
     this.chamado = chamado;
-    var locs = chamado.position_destino.split(',')
-    this.map.loadMapByLatLong(locs[0], locs[1]);
+    this.map.loadMapByLatLong(chamado);
+    this.showGraph = this.getSizeArray(this.chamado) === 0;
+  }
+
+  getSizeArray(array) {
+    var size = function (array) {
+      var size = 0, key;
+      for (key in array) {
+        if (array.hasOwnProperty(key)) size++;
+      }
+      return size;
+    }
+    return size(array);
   }
 
   onSubmit(formData) {
@@ -56,8 +68,9 @@ export class UsersComponent implements OnInit {
     formData.form.controls.cadastro.setValue('');
   }
 
-ngOnInit() {
-  this.chamados = new Array<any>();
-}
+  ngOnInit() {
+    this.chamados = new Array<any>();
+    this.showGraph = this.getSizeArray(this.chamado) === 0;
+  }
 
 }
