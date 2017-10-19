@@ -21,6 +21,9 @@ import { UsersComponent } from './users/users.component';
 import { ChamadosListComponent } from './chamados/chamados-list/chamados-list.component';
 import { MapComponent } from './map/map.component';
 import { GraficoComponent } from './grafico/grafico.component';
+import { MotoristasComponent } from './motoristas/motoristas.component';
+import { ModalComponent } from './modal/modal.component';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -41,7 +44,9 @@ export const firebaseConfig = {
     ChamadosListComponent,
     GetImagePipe,
     MapComponent,
-    GraficoComponent
+    GraficoComponent,
+    MotoristasComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +57,13 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     routes,
     BrowserAnimationsModule,
-    ChartsModule
+    ChartsModule,
+    BootstrapModalModule//.forRoot({container:document.body})
   ],
-  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent],
+  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent, ModalComponent],
+  entryComponents: [
+        ModalComponent
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

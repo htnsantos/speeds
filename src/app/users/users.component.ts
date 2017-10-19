@@ -1,3 +1,5 @@
+import { DialogService } from 'ng2-bootstrap-modal';
+import { ModalComponent } from './../modal/modal.component';
 import { GraficoComponent } from './../grafico/grafico.component';
 import { MapComponent } from './../map/map.component';
 import { ChamadosListComponent } from './../chamados/chamados-list/chamados-list.component';
@@ -30,7 +32,7 @@ export class UsersComponent implements OnInit {
   showGraph: boolean = true;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, private authGuard: AuthGuard,
-    private angularFire: AngularFireDatabase, private map: MapComponent) {
+    private angularFire: AngularFireDatabase, private map: MapComponent, private dialogService: DialogService) {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -66,6 +68,23 @@ export class UsersComponent implements OnInit {
     }).then((t: any) => console.log('dados gravados: ' + t.key)),
       (e: any) => console.log(e.message);
     formData.form.controls.cadastro.setValue('');
+  }
+
+  showConfirm() {
+    let disposable = this.dialogService.addDialog(ModalComponent, {
+      title: 'Confirm title',
+      message: 'Confirm message'
+    })
+      .subscribe((isConfirmed) => {
+        
+        /*if (isConfirmed) {
+          alert('accepted');
+        }
+        else {
+          alert('declined');
+        }*/
+      });
+    
   }
 
   ngOnInit() {

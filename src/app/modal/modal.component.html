@@ -1,0 +1,18 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Motoristas</h4>
+    </div>
+    <div class="modal-body">
+      <li *ngFor="let m of motoristas | async" class="list-group-item color-list">
+
+        <a class="list-motoristas" (click)="selecionarMotorista(m)"> {{ m.name }} {{ m.phone }}</a>
+      </li>
+    </div>
+    <div class="modal-footer">
+      <div class="col-md-3 pull-right">
+        <button type="button" class="btn btn-danger" (click)="close()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

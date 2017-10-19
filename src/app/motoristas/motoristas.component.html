@@ -1,0 +1,20 @@
+<div class="container">
+
+  <h2 class="col-lg-offset-1">Cadastro de Motoristas</h2>
+  <form #f="ngForm" (submit)="cadastrarMotorista(f)">
+    <div class="col-lg-4 col-lg-offset-4">
+      <div class="form-group">
+        <label for="nome">Nome do Motorista:</label>
+        <input type="text" required class="form-control" ngModel name="nome" placeholder="Nome">
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone de Contato:</label>
+        <input type="text" required class="form-control" ngModel name="telefone" placeholder="Telefone de Contato">
+      </div>
+      <br>
+
+      <button type="submit" [disabled]="!f.valid"  class="col-lg-6 col-lg-offset-3 btn btn-primary">Cadastrar</button>
+    </div>
+
+  </form>
+</div>
