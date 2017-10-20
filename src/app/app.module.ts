@@ -13,6 +13,7 @@ import { routes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as $ from 'jquery';
 import { ChartsModule } from 'ng2-charts';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -24,6 +25,7 @@ import { GraficoComponent } from './grafico/grafico.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
 import { ModalComponent } from './modal/modal.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { MotoristasListComponent } from './motoristas-list/motoristas-list.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -46,7 +48,8 @@ export const firebaseConfig = {
     MapComponent,
     GraficoComponent,
     MotoristasComponent,
-    ModalComponent
+    ModalComponent,
+    MotoristasListComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ export const firebaseConfig = {
     routes,
     BrowserAnimationsModule,
     ChartsModule,
-    BootstrapModalModule//.forRoot({container:document.body})
+    BootstrapModalModule,//.forRoot({container:document.body})
+    HttpClientModule
   ],
   providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent, ModalComponent],
   entryComponents: [

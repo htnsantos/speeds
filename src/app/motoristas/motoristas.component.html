@@ -1,8 +1,13 @@
-<div class="container">
+<div class="container col-md-12">
 
-  <h2 class="col-lg-offset-1">Cadastro de Motoristas</h2>
+  <div class="motorista-container wrapper col-md-4">
+    <app-motoristas-list></app-motoristas-list>
+  </div>
+
+  <!--h2 class="col-lg-offset-1">Cadastro de Motoristas</h2-->
+  <div class="col-md-8">
   <form #f="ngForm" (submit)="cadastrarMotorista(f)">
-    <div class="col-lg-4 col-lg-offset-4">
+    <div class="col-lg-8 col-lg-offset-1 detail-cad-motorista">
       <div class="form-group">
         <label for="nome">Nome do Motorista:</label>
         <input type="text" required class="form-control" ngModel name="nome" placeholder="Nome">
@@ -17,4 +22,5 @@
     </div>
 
   </form>
+  </div>
 </div>

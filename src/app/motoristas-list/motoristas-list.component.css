@@ -1,0 +1,15 @@
+.motorista-container {
+    background:white;    
+    position:fixed;
+    height: 100%;
+}
+
+.color-list {
+    background: #f8f8f8;
+}
+
+.detail-list {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}

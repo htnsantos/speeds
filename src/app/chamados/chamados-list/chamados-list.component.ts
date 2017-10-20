@@ -36,10 +36,14 @@ export class ChamadosListComponent implements OnInit{
 
   chamadoSelecionado(chamado) {
     this.user.carregarSolicitacao(chamado);
+    
   }
 
   ngOnInit() {
+    
     firebase.database().ref('Requests').on('value', snapshot => {
+    let audioPlayer: HTMLVideoElement = <HTMLVideoElement> document.getElementById("audio");  
+   // audioPlayer.play();        
     this.grafico.carregaGrafico(this.chamados);
   })
   }
