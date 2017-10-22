@@ -26,9 +26,21 @@
     <div class="row">
       <label class="font-chamado-label dist-solicitante"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
     </div>
+    <div class="row">
+      <label class="font-chamado-label dist-solicitante"> Modelo: </label> <a class="font-chamado-value">{{veiculo.modelo}}</a>
+    </div>
+    <div class="row">
+      <label class="font-chamado-label dist-solicitante"> Placa: </label> <a class="font-chamado-value">{{veiculo.placa}}</a>
+    </div>
     <div class="col-md-8">
       <div class="row">
         <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao | date: 'dd/MM/yyyy hh:MM'}}</a>
+      </div>
+      <div class="row" *ngIf="statusChamado == 'chamadoAndamento'">
+        <label class="font-chamado-label"> Motorista Designado: </label> <a class="font-chamado-value">{{chamado.driver_nome}}</a>
+      </div>
+      <div class="row" *ngIf="statusChamado == 'chamadoAndamento'">
+        <label class="font-chamado-label"> Celular do Motorista: </label> <a class="font-chamado-value">{{chamado.driver_cel}}</a>
       </div>
       <div class="row">
         <label class="font-chamado-label"> Tipo: </label> <a class="font-chamado-value">{{chamado.type}}</a>
@@ -77,10 +89,13 @@
 
     <div class="col-md-12 margin-botoes">
       <div class="col-md-3">
-        <button type="submit" class="btn btn-danger" style="margin-bottom: 23%;">Cancelar</button>
+        <button type="submit" class="btn btn-danger" style="margin-bottom: 23%;" (click)="cancelarChamado()">Cancelar</button>
       </div>
-      <div class="col-md-3">
-        <button type="submit" class="btn btn-primary" (click)=showConfirm()>Direcionar</button>
+      <div class="col-md-3" *ngIf="statusChamado == 'chamadoAberto'">
+        <button type="submit" class="btn btn-primary" (click)=listarMotoristas()>Direcionar</button>
+      </div>
+      <div class="col-md-3" *ngIf="statusChamado == 'chamadoAndamento'">
+        <button type="submit" class="btn btn-primary" (click)=concluirChamado()>Conclusão</button>
       </div>
     </div>
 

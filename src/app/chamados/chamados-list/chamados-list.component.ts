@@ -35,6 +35,8 @@ export class ChamadosListComponent implements OnInit {
       ).valueChanges()
     );  
 
+    this.empty = true;
+    
     this.chamados.subscribe(chamado =>{
       this.empty = chamado.length == 0;
       console.log(this.empty);
@@ -55,7 +57,7 @@ export class ChamadosListComponent implements OnInit {
           var childData = childSnapshot.val();
           if(childData.id == chamado.id){
             chamado.key = key;
-            self.user.carregarSolicitacao(chamado);
+            self.user.carregarSolicitacao(chamado, "chamadoAberto");
           }
         });
       });      

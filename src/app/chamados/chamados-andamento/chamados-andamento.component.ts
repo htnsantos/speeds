@@ -1,3 +1,4 @@
+import { UsersComponent } from './../../users/users.component';
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -18,13 +19,13 @@ export class ChamadosAndamentoComponent implements OnInit {
   size$: BehaviorSubject<string | null>;
   empty : boolean = false;
 
-  constructor(private db: AngularFireDatabase) { 
+  constructor(private db: AngularFireDatabase, private user: UsersComponent) { 
 
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
       db.list('/Requests', ref =>
-       ref.orderByChild('status').equalTo("Atendimento a Caminho")
+       ref.orderByChild('status').equalTo("Atendimento à caminho")
       ).valueChanges()
     ); 
      
@@ -35,6 +36,23 @@ export class ChamadosAndamentoComponent implements OnInit {
       console.log(this.empty);
     }
     )
+  }
+
+  chamadoSelecionado(chamado) {
+    let self = this;
+    var ref = firebase.database().ref("Requests");
+    ref.once("value")
+      .then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+          if(childData.id == chamado.id){
+            chamado.key = key;
+            self.user.carregarSolicitacao(chamado, "chamadoAndamento");
+          }
+        });
+      });      
+
   }
 
   ngOnInit() {

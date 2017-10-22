@@ -17,8 +17,7 @@ export class UsersService {
 
   constructor(private db: AngularFireDatabase, private http: Http) { }
 
-  getTokenByEmail(chamado) {
-
+  getCliente(chamado) {
     this.size$ = new BehaviorSubject(null);
 
     this.users = this.size$.switchMap(size =>
@@ -26,12 +25,39 @@ export class UsersService {
         ref.orderByChild('email').equalTo(chamado.email)
       ).valueChanges()
     );
-    this.users.subscribe(user => {
-      this.sendRequestDriver(user, chamado)
+    return this.users;
+  }
+
+  atendimentoACaminho(chamado, motorista) {
+    
+    let mensagem = "Seu atendimento já está a caminho";
+    let status = "Atendimento à caminho";
+
+    this.getCliente(chamado).subscribe(user => {
+      this.sendRequestDriver(user, chamado, motorista, mensagem, status)
     })
   }
 
-  sendRequestDriver(user, chamado) {
+  cancelarChamado(chamado, motivoCancelamento) {
+    
+    let status = "Atendimento cancelado";
+
+    this.getCliente(chamado).subscribe(user => {
+      this.sendRequestDriver(user, chamado, undefined, motivoCancelamento, status)
+    })
+  }
+
+  concluirChamado(chamado) {
+
+    let mensagem = "Seu atendimento foi concluído";
+    let status = "Atendimento concluído";
+
+    this.getCliente(chamado).subscribe(user => {
+      this.sendRequestDriver(user, chamado, undefined, mensagem, status)
+    })
+  }
+
+  sendRequestDriver(user, chamado, motorista, mensagem, status) {
 
     if (user[0]) {
       let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -41,13 +67,27 @@ export class UsersService {
       let params = {
         token: user[0].token,
         title: "Speed Solution",
-        message: "Seu atendimento já está a caminho"
+        message: mensagem
       }
 
-      this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
+      console.log(params);
+
+      //this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
       //.map(this.onLoginSuccess)
       //.catch(this.onError);
-      this.updateItem(chamado.key, {status: "Atendimento a Caminho"});
+      var obj = {
+        "status": status,
+        "driver_nome": motorista ? motorista.name : "",
+        "driver_cel": motorista ? motorista.phone : "",
+        "data_atendimento": new Date().getTime(),
+      }
+
+      if(motorista == undefined) {
+        delete obj.driver_nome;
+        delete obj.driver_cel;
+      }
+
+      this.updateItem(chamado.key, obj);
     }
 
     return true;

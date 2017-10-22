@@ -29,6 +29,9 @@ import { MotoristasComponent } from './motoristas/motoristas.component';
 import { ModalComponent } from './modal/modal.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { MotoristasListComponent } from './motoristas-list/motoristas-list.component';
+import { ModalCancelarComponent } from './modal-cancelar/modal-cancelar.component';
+import { ModalConcluirComponent } from './modal-concluir/modal-concluir.component';
+import { ModalInfoComponent } from './modal-info/modal-info.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -53,7 +56,10 @@ export const firebaseConfig = {
     MotoristasComponent,
     ModalComponent,
     MotoristasListComponent,
-    ChamadosAndamentoComponent
+    ChamadosAndamentoComponent,
+    ModalCancelarComponent,
+    ModalConcluirComponent,
+    ModalInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -68,9 +74,20 @@ export const firebaseConfig = {
     BootstrapModalModule,//.forRoot({container:document.body})
     HttpClientModule
   ],
-  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent, ModalComponent, UsersService],
+  providers: [
+    AuthGuard, 
+    LoginComponent, 
+    AngularFireDatabase, 
+    MapComponent, 
+    GraficoComponent, 
+    ModalComponent, 
+    ModalCancelarComponent, 
+    ModalConcluirComponent,
+    ModalInfoComponent,
+    UsersService],
+    
   entryComponents: [
-        ModalComponent
+        ModalComponent, ModalCancelarComponent, ModalConcluirComponent, ModalInfoComponent
       ],
   bootstrap: [AppComponent]
 })

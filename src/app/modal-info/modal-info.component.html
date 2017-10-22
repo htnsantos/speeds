@@ -1,0 +1,15 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+    </div>
+    <div class="modal-body">
+      {{ message }}
+    </div>
+    <div class="modal-footer">
+      <div class="col-md-3 pull-right">
+        <button type="button" class="btn btn-danger" (click)="close()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

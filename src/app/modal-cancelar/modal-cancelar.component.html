@@ -1,0 +1,20 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <form #f="ngForm" (submit)="cadastrarMotorista(f)">
+    <div class="modal-header">
+      <h4 class="modal-title">Cancelamento de Chamado</h4>
+    </div>
+    <div class="modal-body">
+      <textarea required rows="4" cols="50" ngModel name="motivoCancelamento" placeholder="Motivo do Cancelamento"></textarea>
+    </div>
+    <div class="modal-footer">
+      <div class="col-md-3 pull-right">
+        <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Confirmar</button>
+      </div>
+      <div class="col-md-3 pull-right">
+        <button type="button" class="btn btn-danger" (click)="close()">Fechar</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
