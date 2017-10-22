@@ -1,3 +1,5 @@
+
+import { UsersService } from './users/users.service';
 import { GetImagePipe } from './componentes/getImage/loadImage.pipe';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { UsersComponent } from './users/users.component';
 import { ChamadosListComponent } from './chamados/chamados-list/chamados-list.component';
+import { ChamadosAndamentoComponent } from './chamados/chamados-andamento/chamados-andamento.component';
 import { MapComponent } from './map/map.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
@@ -49,7 +52,8 @@ export const firebaseConfig = {
     GraficoComponent,
     MotoristasComponent,
     ModalComponent,
-    MotoristasListComponent
+    MotoristasListComponent,
+    ChamadosAndamentoComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,7 @@ export const firebaseConfig = {
     BootstrapModalModule,//.forRoot({container:document.body})
     HttpClientModule
   ],
-  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent, ModalComponent],
+  providers: [AuthGuard, LoginComponent, AngularFireDatabase, MapComponent, GraficoComponent, ModalComponent, UsersService],
   entryComponents: [
         ModalComponent
       ],

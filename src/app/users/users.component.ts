@@ -1,3 +1,5 @@
+import { UsersService } from './users.service';
+
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ModalComponent } from './../modal/modal.component';
 import { GraficoComponent } from './../grafico/grafico.component';
@@ -13,6 +15,7 @@ import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { moveIn, fallIn, moveInLeft } from '../router.animations';
 import { NgForm } from '@angular/forms';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 
 @Component({
@@ -32,7 +35,9 @@ export class UsersComponent implements OnInit {
   showGraph: boolean = true;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, private authGuard: AuthGuard,
-    private angularFire: AngularFireDatabase, private map: MapComponent, private dialogService: DialogService) {
+    private angularFire: AngularFireDatabase, private map: MapComponent,
+    private dialogService: DialogService,
+    private modal: ModalComponent, private userService: UsersService) {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -71,25 +76,29 @@ export class UsersComponent implements OnInit {
   }
 
   showConfirm() {
+
     let disposable = this.dialogService.addDialog(ModalComponent, {
       title: 'Confirm title',
       message: 'Confirm message'
     })
       .subscribe((isConfirmed) => {
-        
+
         /*if (isConfirmed) {
-          alert('accepted');
+          console.log("");
         }
         else {
           alert('declined');
         }*/
       });
-    
   }
 
   ngOnInit() {
     this.chamados = new Array<any>();
     this.showGraph = this.getSizeArray(this.chamado) === 0;
+    
+    ModalComponent.motoristaSelecionado.subscribe(
+      motorista => this.userService.getTokenByEmail(this.chamado)//motorista
+    );
   }
 
 }

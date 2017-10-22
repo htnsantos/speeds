@@ -46,6 +46,12 @@
 
 .list-motoristas {
     color: black;
+    text-decoration: none;
+}
+
+.table tr.active td {
+  background-color:#204d74 !important;
+  color: white;
 }
  
 @media (min-width: 768px) {

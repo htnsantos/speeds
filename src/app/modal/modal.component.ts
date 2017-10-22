@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
@@ -7,11 +7,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase/app';
-
-//requests
-
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
-
 
 export interface ConfirmModel {
   title: string;
@@ -27,11 +22,13 @@ export class ModalComponent extends DialogComponent<ConfirmModel, boolean> imple
   title: string;
   message: string;
   usuario: any;
+  selectedRow: any;
 
   motoristas: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
+  static motoristaSelecionado = new EventEmitter<any>();
 
-  constructor(dialogService: DialogService, private db: AngularFireDatabase, private http: Http) {
+  constructor(dialogService: DialogService, private db: AngularFireDatabase) {
     super(dialogService);
 
     firebase.auth().onAuthStateChanged(user => {
@@ -49,37 +46,20 @@ export class ModalComponent extends DialogComponent<ConfirmModel, boolean> imple
     );
   }
   confirm() {
+    if(this.selectedRow) {
+      this.motoristas.subscribe(motoristas => {
+        ModalComponent.motoristaSelecionado.emit(motoristas[this.selectedRow]);
+      })
 
-    this.result = true;
-    this.close();
-  }
-
-  selecionarMotorista(motorista) {
-    console.log(motorista);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    headers.append('Access-Control-Allow-Origin','*');
-
-    let options = new RequestOptions({ headers: headers });
-    let params = {
-      token: "ewVkU7gIhbc:APA91bGX5y6iUK3UGwMKYsl2RbjXkiM8_wDUyvgeV4MW_kZZZDDbNWsy4QKn0jJMel17Xry1lGtCZbif5xzhTVoVqn7aVXw1PGDZpIcUScQdkC5kdpAC9XC1bT4HqhIDC9uBk0tOcfGj",
-      title: "Speed Solution",
-      message: "Seu atendimento já está a caminho"
+      this.result = true;
+      this.close();
+    }else {
+      alert("Por favor selecione um motorista");
     }
-
-    this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
-      //.map(this.onLoginSuccess)
-      //.catch(this.onError);
-
-    this.result = true;
-    this.close();
   }
 
-  onLoginSuccess(res) {
-    return res.json();
+  setClickedRow(index) {
+    this.selectedRow = index;
   }
 
-  onError(error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.message || error);
-  }
 }
