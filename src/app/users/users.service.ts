@@ -66,7 +66,7 @@ export class UsersService {
 
       let options = new RequestOptions({ headers: headers });
       let params = {
-        token: user[0].token,
+        token: user[4],
         title: "Speed Solution",
         message: mensagem
       }
