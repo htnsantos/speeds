@@ -33,18 +33,20 @@ export class UsersService {
     
     let mensagem = "Seu atendimento já está a caminho";
     let status = "Atendimento à caminho";
+    let operacao ="atendimentoCaminho";
 
     this.getCliente(chamado).subscribe(user => {
-      this.sendRequestDriver(user, chamado, motorista, mensagem, status)
+      this.sendRequestDriver(user, chamado, motorista, mensagem, status, operacao)
     })
   }
 
   cancelarChamado(chamado, motivoCancelamento) {
     
     let status = "Atendimento cancelado";
+    let operacao ="atendimentoCancelado";
 
     this.getCliente(chamado).subscribe(user => {
-      this.sendRequestDriver(user, chamado, undefined, motivoCancelamento, status)
+      this.sendRequestDriver(user, chamado, undefined, motivoCancelamento, status, operacao)
     })
   }
 
@@ -52,13 +54,14 @@ export class UsersService {
 
     let mensagem = "Seu atendimento foi concluído";
     let status = "Atendimento concluído";
+    let operacao ="atendimentoConcluido";
 
     this.getCliente(chamado).subscribe(user => {
-      this.sendRequestDriver(user, chamado, undefined, mensagem, status)
+      this.sendRequestDriver(user, chamado, undefined, mensagem, status, operacao)
     })
   }
 
-  sendRequestDriver(user, chamado, motorista, mensagem, status) {
+  sendRequestDriver(user, chamado, motorista, mensagem, status, operacao) {
 
     if (user[0]) {
       let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -71,21 +74,24 @@ export class UsersService {
         message: mensagem
       }
 
-      console.log(params);
-
       this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
       //.map(this.onLoginSuccess)
       //.catch(this.onError);
-      var obj = {
+      let obj = {
         "status": status,
         "driver": motorista ? motorista.name : "",
         "driver_cel": motorista ? motorista.phone : "",
         "data_atendimento": new Date().getTime(),
+        "motivo_cancelamento": ""
       }
 
       if(motorista == undefined) {
         delete obj.driver;
         delete obj.driver_cel;
+      }
+
+      if(operacao == "atendimentoCancelado") {
+        obj.motivo_cancelamento = mensagem
       }
 
       this.updateItem(chamado.key, obj);
