@@ -20,9 +20,10 @@ export class UsersService {
   getCliente(chamado) {
     this.size$ = new BehaviorSubject(null);
 
+    console.log(chamado.key);
+
     this.users = this.size$.switchMap(size =>
-      this.db.list('/UserModel', ref =>
-        ref.orderByChild('email').equalTo(chamado.email)
+      this.db.list('/UserModel/' + chamado.key
       ).valueChanges()
     );
     return this.users;
@@ -77,13 +78,13 @@ export class UsersService {
       //.catch(this.onError);
       var obj = {
         "status": status,
-        "driver_nome": motorista ? motorista.name : "",
+        "driver": motorista ? motorista.name : "",
         "driver_cel": motorista ? motorista.phone : "",
         "data_atendimento": new Date().getTime(),
       }
 
       if(motorista == undefined) {
-        delete obj.driver_nome;
+        delete obj.driver;
         delete obj.driver_cel;
       }
 

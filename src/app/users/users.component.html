@@ -37,7 +37,7 @@
         <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao | date: 'dd/MM/yyyy hh:MM'}}</a>
       </div>
       <div class="row" *ngIf="statusChamado == 'chamadoAndamento'">
-        <label class="font-chamado-label"> Motorista Designado: </label> <a class="font-chamado-value">{{chamado.driver_nome}}</a>
+        <label class="font-chamado-label"> Motorista Designado: </label> <a class="font-chamado-value">{{chamado.driver}}</a>
       </div>
       <div class="row" *ngIf="statusChamado == 'chamadoAndamento'">
         <label class="font-chamado-label"> Celular do Motorista: </label> <a class="font-chamado-value">{{chamado.driver_cel}}</a>
