@@ -89,6 +89,11 @@ h2 {
     overflow-y: auto;    
 }
 
+.scroll-down-chamado {
+    height:  600px;
+    overflow-y: auto;    
+}
+
 .table-responsive {
     max-height:300px;
 }

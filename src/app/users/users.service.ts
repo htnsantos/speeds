@@ -70,7 +70,9 @@ export class UsersService {
         message: mensagem
       }
 
-      this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
+      console.log(params);
+
+      //this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
       //.map(this.onLoginSuccess)
       //.catch(this.onError);
       var obj = {
