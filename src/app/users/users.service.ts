@@ -17,16 +17,17 @@ export class UsersService {
 
   constructor(private db: AngularFireDatabase, private http: Http) { }
 
-  getCliente(chamado) {
-    this.size$ = new BehaviorSubject(null);
+  getToken(chamado) {
+    
+    let token: any;
 
-    console.log(chamado.key);
-
-    this.users = this.size$.switchMap(size =>
-      this.db.list('/UserModel/' + chamado.key
-      ).valueChanges()
-    );
-    return this.users;
+    var dfRef = firebase.database().ref('UserModel/' + chamado.key + '/token');
+      dfRef.on('value', function(snapshot) {
+        console.log(snapshot.val());
+      token = snapshot.val();
+       return token;
+    })
+   
   }
 
   atendimentoACaminho(chamado, motorista) {
@@ -35,19 +36,27 @@ export class UsersService {
     let status = "Atendimento à caminho";
     let operacao ="atendimentoCaminho";
 
-    this.getCliente(chamado).subscribe(user => {
-      this.sendRequestDriver(user, chamado, motorista, mensagem, status, operacao)
-    })
+    let self = this;
+
+    var dfRef = firebase.database().ref('UserModel/' + chamado.key + '/token');
+      dfRef.on('value', function(snapshot) {
+      self.sendRequestDriver(snapshot.val(), chamado, motorista, mensagem, status, operacao)
+   })
+
+    
   }
 
   cancelarChamado(chamado, motivoCancelamento) {
     
     let status = "Atendimento cancelado";
     let operacao ="atendimentoCancelado";
+    let self = this;
 
-    this.getCliente(chamado).subscribe(user => {
-      this.sendRequestDriver(user, chamado, undefined, motivoCancelamento, status, operacao)
+    var dfRef = firebase.database().ref('UserModel/' + chamado.key + '/token');
+      dfRef.on('value', function(snapshot) {
+      self.sendRequestDriver(snapshot.val(), chamado, undefined, motivoCancelamento, status, operacao)
     })
+
   }
 
   concluirChamado(chamado) {
@@ -55,21 +64,24 @@ export class UsersService {
     let mensagem = "Seu atendimento foi concluído";
     let status = "Atendimento concluído";
     let operacao ="atendimentoConcluido";
+    let self = this;
 
-    this.getCliente(chamado).subscribe(user => {
-      this.sendRequestDriver(user, chamado, undefined, mensagem, status, operacao)
+    var dfRef = firebase.database().ref('UserModel/' + chamado.key + '/token');
+      dfRef.on('value', function(snapshot) {
+      self.sendRequestDriver(snapshot.val(), chamado, undefined, mensagem, status, operacao)
     })
+
   }
 
-  sendRequestDriver(user, chamado, motorista, mensagem, status, operacao) {
+  sendRequestDriver(token, chamado, motorista, mensagem, status, operacao) {
 
-    if (user[0]) {
+    if (token) {
       let headers = new Headers({ 'Content-Type': 'application/json' });
       headers.append('Access-Control-Allow-Origin', '*');
 
       let options = new RequestOptions({ headers: headers });
       let params = {
-        token: user[3],
+        token: token,
         title: "Speed Solution",
         message: mensagem
       }
