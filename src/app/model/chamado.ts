@@ -11,5 +11,8 @@ export class Chamado {
     position_retirada: any;
     status: string;
     type: string;
+    tempo_estimado: any;
+    car: any;
+    placa: any;
     condicoes: Array<any>;
 }
