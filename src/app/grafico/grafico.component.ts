@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Chamado } from './../model/chamado';
+import { ChamadosListComponent } from './../chamados/chamados-list/chamados-list.component';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { BaseChartDirective } from "ng2-charts";
 
 declare var Chart: any;
 
 @Component({
   selector: 'app-grafico',
   templateUrl: './grafico.component.html',
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./grafico.component.css']
 })
-export class GraficoComponent {
 
+export class GraficoComponent implements OnInit{
+
+  pieChartLabels: string[] = new Array<any>(); //= ['Bateria', 'Chaveiro', 'Combustível', 'Guincho', 'Troca de Pneu'];
+  pieChartData: number[] = [0, 0, 0, 0, 1];
+  pieChartType: string = 'pie';
+  
   constructor() {
 
   }
-
-  public pieChartLabels: string[] = ['Bateria', 'Chaveiro', 'Combustível', 'Guincho', 'Troca de Pneu'];
-  public pieChartData: number[] = [0, 0, 0, 0, 1];
-  public pieChartType: string = 'pie';
 
   carregaGrafico(chamados) {
 
@@ -39,6 +44,16 @@ export class GraficoComponent {
 
   public chartHovered(e: any): void {
     console.log(e);
+  }
+
+  ngOnInit(){
+    ChamadosListComponent.carregaGrafico.subscribe(     
+      chamado => { 
+        for (var i in chamado){
+         this.pieChartLabels.push(chamado[i].type);
+        }
+         //this.ref.detectChanges();
+      });
   }
 
 }

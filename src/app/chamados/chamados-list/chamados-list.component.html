@@ -1,7 +1,7 @@
 <li *ngFor="let c of chamados | async" class="list-group-item color-list">
     
     <img src="{{ c.type | getImage: 'teste'}}" width="50px" class="space-image"/> 
-    <a class="list-chamado" (click)="chamadoSelecionado(c)"> {{ c.solicitante }} {{ c.data_solicitacao | date: 'hh:MM'}} </a>
+    <a class="list-chamado customScroll" (click)="chamadoSelecionado(c)"> {{ c.solicitante }} {{ c.data_solicitacao }} </a>
 </li>
 <audio id="audio" src="../../../assets/sounds/trembling.mp3" autostart="false" ></audio>
 

@@ -9,11 +9,11 @@ import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-chamados-andamento',
-  templateUrl: './chamados-andamento.component.html',
-  styleUrls: ['./chamados-andamento.component.css']
+  selector: 'app-chamados-recusados',
+  templateUrl: './chamados-recusados.component.html',
+  styleUrls: ['./chamados-recusados.component.css']
 })
-export class ChamadosAndamentoComponent implements OnInit {
+export class ChamadosRecusadosComponent implements OnInit {
 
   chamados: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
@@ -25,7 +25,7 @@ export class ChamadosAndamentoComponent implements OnInit {
 
     this.chamados = this.size$.switchMap(size =>
       db.list('/Requests', ref =>
-       ref.orderByChild('status').equalTo("Atendimento à caminho")
+       ref.orderByChild('status').equalTo("Atendimento cancelado")
       ).valueChanges()
     ); 
      
@@ -35,6 +35,7 @@ export class ChamadosAndamentoComponent implements OnInit {
       this.empty = chamado.length == 0;
     }
     )
+
   }
 
   chamadoSelecionado(chamado) {
@@ -47,7 +48,7 @@ export class ChamadosAndamentoComponent implements OnInit {
           var childData = childSnapshot.val();
           if(childData.id == chamado.id){
             chamado.key = key;
-            self.user.carregarSolicitacao(chamado, "chamadoAndamento");
+            self.user.carregarSolicitacao(chamado, "historicoChamado");
           }
         });
       });      

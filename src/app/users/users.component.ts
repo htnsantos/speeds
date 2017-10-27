@@ -66,6 +66,7 @@ export class UsersComponent implements OnInit {
     this.veiculos.forEach(veic => {
       veiculo = veic;
       this.veiculo = veiculo[0];
+      chamado.veiculo = veiculo;
       this.chamado = chamado;
       this.map.loadMapByLatLong(chamado);
       this.showGraph = this.getSizeArray(this.chamado) === 0;

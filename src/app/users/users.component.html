@@ -1,15 +1,24 @@
-<div class="container col-md-12">
+<div class="container col-md-12 ">
 
-  <div class="user-container wrapper col-md-4">
+  <div class="user-container wrapper col-md-4 scroll-down customScroll">
     <div class="">
-      <h4>Chamados em Aberto</h4>
+      <h4>Assistências em Aberto</h4>
     <app-chamados-list></app-chamados-list>
     </div>
 
     <div class="">
-      <h4>Chamados em Andamento</h4>
+      <h4>Assistências em Andamento</h4>
     <app-chamados-andamento></app-chamados-andamento>
     </div>
+
+    <div class="">
+      <h4>Histórico de Assistências</h4>
+      <app-chamados-historico></app-chamados-historico>
+    </div>
+
+    <div class="">
+      <h4>Assistências Recusadas</h4>
+      <app-chamados-recusados></app-chamados-recusados>
   </div>
 
 </div>
@@ -27,14 +36,17 @@
       <label class="font-chamado-label dist-solicitante"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
     </div>
     <div class="row">
-      <label class="font-chamado-label dist-solicitante"> Modelo: </label> <a class="font-chamado-value">{{veiculo.modelo}}</a>
+      <label class="font-chamado-label dist-solicitante"> Modelo: </label> <a class="font-chamado-value">{{ chamado.car}}</a>
     </div>
     <div class="row">
-      <label class="font-chamado-label dist-solicitante"> Placa: </label> <a class="font-chamado-value">{{veiculo.placa}}</a>
+      <label class="font-chamado-label dist-solicitante"> Placa: </label> <a class="font-chamado-value">{{chamado.placa}}</a>
     </div>
     <div class="col-md-8">
       <div class="row">
-        <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao | date: 'dd/MM/yyyy hh:MM'}}</a>
+        <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Tempo de Assistência: </label> <a class="font-chamado-value">{{chamado.tempo_estimado}}</a>
       </div>
       <div class="row" *ngIf="statusChamado == 'chamadoAndamento'">
         <label class="font-chamado-label"> Motorista Designado: </label> <a class="font-chamado-value">{{chamado.driver}}</a>

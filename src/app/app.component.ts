@@ -2,7 +2,7 @@ import { auth } from 'firebase/app';
 import { AuthGuard } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { moveIn, fallIn, moveInLeft } from './router.animations';
-import { Component, OnInit, HostBinding, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostBinding, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import * as firebase from 'firebase/app';
 
@@ -11,6 +11,7 @@ import * as firebase from 'firebase/app';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [moveIn(), fallIn(), moveInLeft()],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[@moveIn]': '' }
 
 })

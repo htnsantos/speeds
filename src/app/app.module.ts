@@ -1,9 +1,11 @@
+import { ChamadosRecusadosComponent } from './chamados/chamados-recusados/chamados-recusados.component';
+import { ChamadosHistoricoComponent } from './chamados/chamados-historico/chamados-historico.component';
 
 import { UsersService } from './users/users.service';
 import { GetImagePipe } from './componentes/getImage/loadImage.pipe';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
@@ -59,7 +61,10 @@ export const firebaseConfig = {
     ChamadosAndamentoComponent,
     ModalCancelarComponent,
     ModalConcluirComponent,
-    ModalInfoComponent
+    ModalInfoComponent,
+    ChamadosHistoricoComponent,
+    ChamadosRecusadosComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { GraficoComponent } from './../../grafico/grafico.component';
 import { UsersComponent } from './../../users/users.component';
 import { Observable } from 'rxjs/Observable';
 import { Chamado } from './../../model/chamado';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -20,6 +20,7 @@ export class ChamadosListComponent implements OnInit {
   chamados: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
   empty : boolean;
+  static carregaGrafico = new EventEmitter<any>();
 
   constructor(private db: AngularFireDatabase, private user: UsersComponent, private grafico: GraficoComponent) {
 
@@ -40,6 +41,7 @@ export class ChamadosListComponent implements OnInit {
     this.chamados.subscribe(chamado =>{
       this.empty = chamado.length == 0;
       console.log(this.empty);
+      ChamadosListComponent.carregaGrafico.emit(chamado);
     });
       
   }
@@ -69,7 +71,7 @@ export class ChamadosListComponent implements OnInit {
     firebase.database().ref('Requests').on('value', snapshot => {
       let audioPlayer: HTMLVideoElement = <HTMLVideoElement>document.getElementById("audio");
       //audioPlayer.play();        
-      this.grafico.carregaGrafico(this.chamados);
+      //sthis.grafico.carregaGrafico(this.chamados);
     })
   }
 }
