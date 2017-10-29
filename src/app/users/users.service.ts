@@ -23,7 +23,7 @@ export class UsersService {
 
     var dfRef = firebase.database().ref('UserModel/' + chamado.key + '/token');
       dfRef.on('value', function(snapshot) {
-        console.log(snapshot.val());
+       
       token = snapshot.val();
        return token;
     })
@@ -86,7 +86,7 @@ export class UsersService {
         message: mensagem
       }
 
-      //this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
+      this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
       //.map(this.onLoginSuccess)
       //.catch(this.onError);
       var data = new Date();
@@ -97,14 +97,19 @@ export class UsersService {
         "driver": motorista ? motorista.name : "",
         "driver_cel": motorista ? motorista.phone : "",
         "data_atendimento": data.toLocaleDateString() + " " + data.toLocaleTimeString() + " " + periodo,
-        "veiculo_speed": chamado.veiculo.modelo,
-        "veiculo_placa": chamado.veiculo.placa,
+        "veiculo_speed":  chamado.veiculo ? chamado.veiculo.modelo : "",
+        "veiculo_placa": chamado.veiculo ? chamado.veiculo.placa : "",
         "motivo_cancelamento": ""
       }
 
       if(motorista == undefined) {
         delete obj.driver;
         delete obj.driver_cel;
+      }
+
+      if(chamado.veiculo == undefined){
+        delete obj.veiculo_placa;
+        delete obj.veiculo_speed;
       }
 
       if(operacao == "atendimentoCancelado") {

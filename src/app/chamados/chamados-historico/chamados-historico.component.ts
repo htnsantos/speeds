@@ -1,5 +1,5 @@
 import { UsersComponent } from './../../users/users.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
@@ -17,40 +17,52 @@ export class ChamadosHistoricoComponent implements OnInit {
 
   chamados: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
-  empty : boolean = false;
+  empty: boolean = false;
+  historicos = [];
 
-  constructor(private db: AngularFireDatabase, private user: UsersComponent) { 
+  constructor(private db: AngularFireDatabase, private user: UsersComponent, private ref: ChangeDetectorRef) {
 
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
       db.list('/History', ref =>
-       ref.orderByChild('status')//.equalTo("Atendimento à caminho")
+        ref.orderByChild('status')//.equalTo("Atendimento à caminho")
       ).valueChanges()
-    ); 
-     
+    );
+
     this.empty = true;
 
-    this.chamados.subscribe(chamado =>{
-      this.empty = chamado.length == 0;
+    this.chamados.subscribe(historico => {
+      historico.forEach(hist => {
+        for (var key in hist) {
+          if (hist.hasOwnProperty(key)) {
+            this.historicos.push(hist[key]);
+          }
+        }
+
+      })
+      this.empty = historico.length == 0;
+      this.ref.markForCheck();
     }
     )
+
   }
 
   chamadoSelecionado(chamado) {
-    let self = this;
-    var ref = firebase.database().ref("Requests");
+    this.user.carregarSolicitacao(chamado, "historicoChamado");
+   /* let self = this;
+    var ref = firebase.database().ref("History");
     ref.once("value")
       .then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
           var key = childSnapshot.key;
           var childData = childSnapshot.val();
-          if(childData.id == chamado.id){
+          if (childData.id == chamado.id) {
             chamado.key = key;
             self.user.carregarSolicitacao(chamado, "historicoChamado");
           }
         });
-      });      
+      });*/
 
   }
 

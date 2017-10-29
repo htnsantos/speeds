@@ -62,18 +62,10 @@ export class UsersComponent implements OnInit {
   carregarSolicitacao(chamado, statusChamado) {
 
     this.statusChamado = statusChamado;
-    this.veiculos =
-      this.angularFire.list('/Veiculos/' + chamado.key
-      ).valueChanges()
-
-    let veiculo = [];  
-    this.veiculos.forEach(veic => {
-      veiculo = veic;
-      chamado.veiculo = veiculo;
-      this.chamado = chamado;
-      this.map.loadMapByLatLong(chamado);
-      this.showGraph = this.getSizeArray(this.chamado) === 0;
-    })
+     
+    this.chamado = chamado;
+    this.showGraph = this.getSizeArray(this.chamado) === 0;
+    this.map.loadMapByLatLong(chamado);
     
   }
 
