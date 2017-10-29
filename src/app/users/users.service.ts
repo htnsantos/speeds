@@ -86,17 +86,19 @@ export class UsersService {
         message: mensagem
       }
 
-      this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
+      //this.http.post("https://speeds-api.herokuapp.com/api/message", params, options).subscribe(res => console.log(res.json()));
       //.map(this.onLoginSuccess)
       //.catch(this.onError);
+      var data = new Date();
+      var periodo = data.getHours() < 12 ? "AM" : "PM";
      
       let obj = {
         "status": status,
         "driver": motorista ? motorista.name : "",
         "driver_cel": motorista ? motorista.phone : "",
-        "data_atendimento": new Date().getTime(),
-        "veiculo_speed": chamado.car,
-        "veiculo_placa": chamado.placa,
+        "data_atendimento": data.toLocaleDateString() + " " + data.toLocaleTimeString() + " " + periodo,
+        "veiculo_speed": chamado.veiculo.modelo,
+        "veiculo_placa": chamado.veiculo.placa,
         "motivo_cancelamento": ""
       }
 

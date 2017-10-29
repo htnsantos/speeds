@@ -1,6 +1,6 @@
 import { Chamado } from './../model/chamado';
 import { ChamadosListComponent } from './../chamados/chamados-list/chamados-list.component';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseChartDirective } from "ng2-charts";
 
 declare var Chart: any;
@@ -8,14 +8,15 @@ declare var Chart: any;
 @Component({
   selector: 'app-grafico',
   templateUrl: './grafico.component.html',
-  //changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./grafico.component.css']
 })
 
+
 export class GraficoComponent implements OnInit{
 
-  pieChartLabels: string[] = new Array<any>(); //= ['Bateria', 'Chaveiro', 'Combustível', 'Guincho', 'Troca de Pneu'];
-  pieChartData: number[] = [0, 0, 0, 0, 1];
+  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
+  pieChartLabels: string[] = ['Bateria', 'Chaveiro', 'Combustível', 'Guincho', 'Troca de Pneu'];
+  pieChartData: number[] = [0,0,0,0,0];
   pieChartType: string = 'pie';
   
   constructor() {
@@ -49,10 +50,22 @@ export class GraficoComponent implements OnInit{
   ngOnInit(){
     ChamadosListComponent.carregaGrafico.subscribe(     
       chamado => { 
-        for (var i in chamado){
-         this.pieChartLabels.push(chamado[i].type);
-        }
-         //this.ref.detectChanges();
+                
+       let groupped = chamado.reduce(function (r, a) {
+        r[a.type] = r[a.type] || [];
+        r[a.type].push(a);
+        return r;
+    }, Object.create(null));
+        
+         this.pieChartData = [
+           groupped["Bateria"] ? groupped["Bateria"].length : 0,
+           groupped["Chaveiro"] ? groupped["Chaveiro"].length : 0,
+           groupped["Combustivel"] ? groupped["Combustivel"].length : 0,
+           groupped["Guincho"] ? groupped["Guincho"].length : 0,
+           groupped["Troca Pneu"] ? groupped["Troca Pneu"].length : 0
+          ];
+
+         this.chart.chart.update();
       });
   }
 

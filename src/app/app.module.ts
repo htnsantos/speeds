@@ -34,6 +34,7 @@ import { MotoristasListComponent } from './motoristas-list/motoristas-list.compo
 import { ModalCancelarComponent } from './modal-cancelar/modal-cancelar.component';
 import { ModalConcluirComponent } from './modal-concluir/modal-concluir.component';
 import { ModalInfoComponent } from './modal-info/modal-info.component';
+import { ModalMotoristaCarComponent } from './modal-motorista-car/modal-motorista-car.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -64,6 +65,7 @@ export const firebaseConfig = {
     ModalInfoComponent,
     ChamadosHistoricoComponent,
     ChamadosRecusadosComponent,
+    ModalMotoristaCarComponent,
     
   ],
   imports: [
@@ -78,6 +80,7 @@ export const firebaseConfig = {
     ChartsModule,
     BootstrapModalModule,//.forRoot({container:document.body})
     HttpClientModule
+    
   ],
   providers: [
     AuthGuard, 
@@ -89,11 +92,17 @@ export const firebaseConfig = {
     ModalCancelarComponent, 
     ModalConcluirComponent,
     ModalInfoComponent,
-    UsersService],
+    UsersService
+    
+  ],
     
   entryComponents: [
-        ModalComponent, ModalCancelarComponent, ModalConcluirComponent, ModalInfoComponent
-      ],
+    ModalComponent, 
+    ModalCancelarComponent, 
+    ModalConcluirComponent, 
+    ModalInfoComponent,
+    ModalMotoristaCarComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,7 +24,7 @@ export class ChamadosHistoricoComponent implements OnInit {
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
-      db.list('/Requests', ref =>
+      db.list('/History', ref =>
        ref.orderByChild('status')//.equalTo("Atendimento à caminho")
       ).valueChanges()
     ); 

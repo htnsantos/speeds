@@ -1,3 +1,4 @@
+import { Veiculo } from './veiculo';
 export class Chamado {
     $key: string;
     id: string;
@@ -15,4 +16,5 @@ export class Chamado {
     car: any;
     placa: any;
     condicoes: Array<any>;
+    veiculo: Veiculo;
 }

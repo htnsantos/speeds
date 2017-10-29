@@ -70,8 +70,8 @@ export class ChamadosListComponent implements OnInit {
 
     firebase.database().ref('Requests').on('value', snapshot => {
       let audioPlayer: HTMLVideoElement = <HTMLVideoElement>document.getElementById("audio");
-      //audioPlayer.play();        
-      //sthis.grafico.carregaGrafico(this.chamados);
+      audioPlayer.play();  
+            
     })
   }
 }
