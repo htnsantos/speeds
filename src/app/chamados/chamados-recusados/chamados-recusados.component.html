@@ -1,9 +1,8 @@
-<li *ngFor="let c of chamados | async" class="list-group-item color-list">
+<li *ngFor="let h of historicos" class="list-group-item color-list">
     
-    <img src="{{ c.type | getImage: 'teste'}}" width="50px" class="space-image"/> 
-    <a class="list-chamado" (click)="chamadoSelecionado(c)"> {{ c.solicitante }} {{ c.data_solicitacao }} </a>
+    <img src="{{ h.type | getImage: 'teste'}}" width="50px" class="space-image"/> 
+    <a class="list-chamado" (click)="chamadoSelecionado(h)"> {{ h.solicitante }} {{ h.data_solicitacao }} </a>
 </li>
-<audio id="audio" src="../../../assets/sounds/trembling.mp3" autostart="false" ></audio>
 
 <li style="padding-left: 2%" *ngIf="empty">
     <span class="search_no_results">

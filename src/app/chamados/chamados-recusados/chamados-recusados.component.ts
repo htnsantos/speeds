@@ -1,5 +1,5 @@
 import { UsersComponent } from './../../users/users.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
@@ -18,28 +18,41 @@ export class ChamadosRecusadosComponent implements OnInit {
   chamados: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
   empty : boolean = false;
+  historicos = [];
 
-  constructor(private db: AngularFireDatabase, private user: UsersComponent) { 
+  constructor(private db: AngularFireDatabase, private user: UsersComponent, private ref: ChangeDetectorRef) { 
 
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
-      db.list('/Requests', ref =>
-       ref.orderByChild('status').equalTo("Atendimento cancelado")
+      db.list('/History', ref =>
+       ref.orderByChild('status')
       ).valueChanges()
     ); 
      
     this.empty = true;
-
-    this.chamados.subscribe(chamado =>{
-      this.empty = chamado.length == 0;
+   console.log(this.chamados);
+    this.chamados.subscribe(historico => {
+      historico.forEach(hist => {
+        for (var key in hist) {
+          if (hist.hasOwnProperty(key)) {
+            this.historicos.push(hist[key]);
+          }
+        }
+        this.historicos = this.historicos.filter(hist => {
+          return hist.status == "Atendimento cancelado";
+        })
+      })
+      this.empty = historico.length == 0;
+      this.ref.markForCheck();
     }
     )
 
   }
 
   chamadoSelecionado(chamado) {
-    let self = this;
+    this.user.carregarSolicitacao(chamado, "historicoChamado");
+    /*let self = this;
     var ref = firebase.database().ref("Requests");
     ref.once("value")
       .then(function (snapshot) {
@@ -51,7 +64,7 @@ export class ChamadosRecusadosComponent implements OnInit {
             self.user.carregarSolicitacao(chamado, "historicoChamado");
           }
         });
-      });      
+      }); */     
 
   }
 
