@@ -65,7 +65,9 @@ export class GraficoComponent implements OnInit{
            groupped["Troca Pneu"] ? groupped["Troca Pneu"].length : 0
           ];
 
-         this.chart.chart.update();
+          if(this.chart.chart){
+            this.chart.chart.update();
+          }
       });
   }
 
