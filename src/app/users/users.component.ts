@@ -174,8 +174,8 @@ export class UsersComponent implements OnInit {
       veiculo => {
         this.chamado.veiculo = veiculo;
         this.userService.atendimentoACaminho(this.chamado, this.motorista);
-        this.exibirMensagemModal("Atendimento em Andamento", 
-        "O Motorista " + this.motorista.name + " foi deslocado para atendimento"); 
+        /*this.exibirMensagemModal("Atendimento em Andamento", 
+        "O Motorista " + this.motorista.name + " foi deslocado para atendimento"); */
         this.statusChamado = "chamadoAndamento";       
       }
     )
