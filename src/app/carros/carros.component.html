@@ -1,0 +1,25 @@
+<div class="container col-md-12">
+
+  <div class="motorista-container wrapper col-md-4">
+    <app-carros-list></app-carros-list>
+  </div>
+
+  <div class="col-md-8">
+  <form #f="ngForm" (submit)="cadastrarCarro(f)">
+    <div class="col-lg-8 col-lg-offset-1 detail-cad-carro">
+      <div class="form-group">
+        <label for="veiculo_speed">Modelo do Veículo:</label>
+        <input type="text" required class="form-control" [(ngModel)]="veiculo_speed"  name="veiculo_speed" placeholder="Veículo">
+      </div>
+      <div class="form-group">
+        <label for="veiculo_placa">Placa do Veículo:</label>
+        <input type="text" required class="form-control" [(ngModel)]="veiculo_placa" name="veiculo_placa" placeholder="Placa">
+      </div>
+      <br>
+
+      <button type="submit" [disabled]="!f.valid"  class="col-lg-6 col-lg-offset-3 btn btn-primary">Cadastrar</button>
+    </div>
+
+  </form>
+  </div>
+</div>

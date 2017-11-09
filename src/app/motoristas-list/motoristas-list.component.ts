@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase/app';
+import { MotoristasComponent } from "../motoristas/motoristas.component";
 
 @Component({
   selector: 'app-motoristas-list',
@@ -17,7 +18,7 @@ export class MotoristasListComponent implements OnInit {
   motoristas: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string | null>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private driver: MotoristasComponent) {
     
     this.size$ = new BehaviorSubject(null);
 
@@ -26,6 +27,23 @@ export class MotoristasListComponent implements OnInit {
         size ? ref.orderByChild('name').equalTo(size) : ref
       ).valueChanges()
     );
+  }
+
+  motoristaSelecionado(motorista) {
+    
+    let self = this;
+    var ref = firebase.database().ref("Drivers");
+    ref.once("value")
+      .then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+            if(childData.name == motorista.name && childData.phone == motorista.phone){
+            motorista.key = key;
+            self.driver.carregarMotorista(motorista, "update");
+            }
+        });
+      });
   }
 
   ngOnInit() {

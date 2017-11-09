@@ -1,4 +1,4 @@
 <li *ngFor="let m of motoristas | async" class="list-group-item color-list">
 
-  <a class="list-motoristas detail-list" > {{ m.name }} {{ m.phone }}</a>
+  <a class="list-motoristas detail-list customScroll" (click)="motoristaSelecionado(m)"> {{ m.name }} {{ m.phone }}</a>
 </li>

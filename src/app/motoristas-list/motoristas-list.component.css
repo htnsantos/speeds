@@ -1,3 +1,8 @@
+a:focus, a:hover {
+    text-decoration: underline !important;
+    cursor: pointer  !important;
+}
+
 .motorista-container {
     background:white;    
     position:fixed;

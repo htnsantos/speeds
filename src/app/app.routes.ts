@@ -1,3 +1,5 @@
+import { ServicosComponent } from './servicos/servicos.component';
+import { CarrosComponent } from './carros/carros.component';
 import { MotoristasComponent } from './motoristas/motoristas.component';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,6 +15,8 @@ export const router: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'motoristas', component: MotoristasComponent, canActivate: [AuthGuard] },
+    { path: 'carros', component: CarrosComponent, canActivate: [AuthGuard] },
+    { path: 'servicos', component: ServicosComponent, canActivate: [AuthGuard] },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard] }
 
 ]

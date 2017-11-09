@@ -1,7 +1,7 @@
 <div class="container col-md-12">
 
   <div class="motorista-container wrapper col-md-4">
-    <app-motoristas-list></app-motoristas-list>
+    <app-servicos-list></app-servicos-list>
   </div>
 
   <!--h2 class="col-lg-offset-1">Cadastro de Motoristas</h2-->
@@ -10,11 +10,11 @@
     <div class="col-lg-8 col-lg-offset-1 detail-cad-motorista">
       <div class="form-group">
         <label for="nome">Nome do Motorista:</label>
-        <input type="text" required class="form-control" [(ngModel)]="name" name="nome" placeholder="Nome">
+        <input type="text" required class="form-control" ngModel name="nome" placeholder="Nome">
       </div>
       <div class="form-group">
         <label for="telefone">Telefone de Contato:</label>
-        <input type="text" required class="form-control" [(ngModel)]="phone" name="telefone" placeholder="Telefone de Contato">
+        <input type="text" required class="form-control" ngModel name="telefone" placeholder="Telefone de Contato">
       </div>
       <br>
 

@@ -1,0 +1,4 @@
+<li *ngFor="let c of carros | async" class="list-group-item color-list">
+
+  <a class="detail-list customScroll" (click)="carroSelecionado(c)"> {{ c.veiculo_speed }} - {{ c.veiculo_placa }} </a>
+</li>

@@ -35,6 +35,10 @@ import { ModalCancelarComponent } from './modal-cancelar/modal-cancelar.componen
 import { ModalConcluirComponent } from './modal-concluir/modal-concluir.component';
 import { ModalInfoComponent } from './modal-info/modal-info.component';
 import { ModalMotoristaCarComponent } from './modal-motorista-car/modal-motorista-car.component';
+import { CarrosComponent } from './carros/carros.component';
+import { ServicosComponent } from './servicos/servicos.component';
+import { CarrosListComponent } from './carros-list/carros-list.component';
+import { ServicosListComponent } from './servicos-list/servicos-list.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -66,6 +70,10 @@ export const firebaseConfig = {
     ChamadosHistoricoComponent,
     ChamadosRecusadosComponent,
     ModalMotoristaCarComponent,
+    CarrosComponent,
+    ServicosComponent,
+    CarrosListComponent,
+    ServicosListComponent,
     
   ],
   imports: [

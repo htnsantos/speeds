@@ -97,8 +97,8 @@ export class UsersService {
         "driver": motorista ? motorista.name : "",
         "driver_cel": motorista ? motorista.phone : "",
         "data_atendimento": data.toLocaleDateString() + " " + data.toLocaleTimeString() + " " + periodo,
-        "veiculo_speed":  chamado.veiculo ? chamado.veiculo.modelo : "",
-        "veiculo_placa": chamado.veiculo ? chamado.veiculo.placa : "",
+        "veiculo_speed":  chamado.veiculo ? chamado.veiculo.veiculo_speed : "",
+        "veiculo_placa": chamado.veiculo ? chamado.veiculo.veiculo_placa : "",
         "motivo_cancelamento": ""
       }
 

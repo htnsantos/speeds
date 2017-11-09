@@ -40,7 +40,6 @@ export class ChamadosListComponent implements OnInit {
     
     this.chamados.subscribe(chamado =>{
       this.empty = chamado.length == 0;
-      console.log(this.empty);
       ChamadosListComponent.carregaGrafico.emit(chamado);
     });
       

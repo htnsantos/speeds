@@ -22,6 +22,9 @@ export class ChamadosRecusadosComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase, private user: UsersComponent, private ref: ChangeDetectorRef) { 
 
+    var data = new Date();
+    data.setDate(data.getDate() - 1);
+
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
@@ -35,7 +38,7 @@ export class ChamadosRecusadosComponent implements OnInit {
     this.chamados.subscribe(historico => {
       historico.forEach(hist => {
         for (var key in hist) {
-          if (hist.hasOwnProperty(key)) {
+          if (hist.hasOwnProperty(key) && hist[key].data_solicitacao && hist[key].data_solicitacao.startsWith(data.toLocaleDateString())) {
             this.historicos.push(hist[key]);
           }
         }
