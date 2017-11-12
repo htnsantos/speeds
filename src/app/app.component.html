@@ -2,27 +2,36 @@
   <div class="container-fluid">
     <img src="assets/images/logoheader.jpg" id="logoheader">
 
-    <div class="navbar-header font-navheader">      
+    <div class="navbar-header font-navheader">
       <a class="navbar-brand font-menu" routerLink="">Bem Vindo {{ name.nome ? name.nome : name.email }}</a>
-      <a class="navbar-brand font-menu">{{ status }}</a>
+      
+      <div class="dropdown dropdown-status">
+        <a class="dropdown-toggle font-menu" data-toggle="dropdown">{{ status }}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a (click)="changeStatus('online')" *ngIf="status!='online'"> Online</a></li>
+          <li><a (click)="changeStatus('offline')" *ngIf="status!='offline'">Offline</a></li>
+        </ul>
+      </div>
+
     </div>
 
     <ul class="nav navbar-nav pull-right">
-        <li routerLinkActive="active">
-          <a class="font-menu" routerLink="/users">Atendimento</a>
-        </li>
-        <li routerLinkActive="active">
-          <a class="font-menu" routerLink="/motoristas">Motoristas</a>
-        </li>
-        <li routerLinkActive="active">
-          <a class="font-menu" routerLink="/carros">Carros</a>
-        </li>
-        <li routerLinkActive="active">
-          <a class="font-menu" routerLink="/servicos">Serviços</a>
-        </li>
-        <li routerLinkActive="active">
-            <a class="font-menu" (click)="logout()">Logout</a>
-        </li>
+      <li routerLinkActive="active">
+        <a class="font-menu" routerLink="/users">Atendimento</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="font-menu" routerLink="/motoristas">Motoristas</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="font-menu" routerLink="/carros">Carros</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="font-menu" routerLink="/servicos">Serviços</a>
+      </li>
+      <li routerLinkActive="active">
+        <a class="font-menu" (click)="logout()">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>

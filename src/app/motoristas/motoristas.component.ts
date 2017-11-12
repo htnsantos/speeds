@@ -43,6 +43,11 @@ export class MotoristasComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
+  limparCampos(formData) {
+    formData.form.controls.nome.setValue('');
+    formData.form.controls.telefone.setValue('');
+  }
+
   updateItem(key: string, value: any, formData): void {
     this.angularFire.object("Drivers/" + key)
       .update(value).then((t: any) => {

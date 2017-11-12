@@ -18,7 +18,8 @@
       </div>
       <br>
 
-      <button type="submit" [disabled]="!f.valid"  class="col-lg-6 col-lg-offset-3 btn btn-primary">Cadastrar</button>
+      <button type="submit" [disabled]="!f.valid"  class="col-lg-4 btn btn-primary">Cadastrar</button>
+      <button type="button" (click)="limparCampos(f)" class="col-lg-4 col-lg-offset-2 btn btn-danger">Cancelar</button>
     </div>
 
   </form>

@@ -26,8 +26,8 @@ export class AppComponent {
   status: any;
   allStatus: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
 
-  constructor(private db: AngularFireDatabase,private authGuard: AuthGuard,
-     private login: LoginComponent, private chRef : ChangeDetectorRef) {
+  constructor(private db: AngularFireDatabase, private authGuard: AuthGuard,
+    private login: LoginComponent, private chRef: ChangeDetectorRef) {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -39,13 +39,22 @@ export class AppComponent {
     this.allStatus =
       db.list('SystemParameter/'
       ).valueChanges()
-    
+
     this.allStatus.subscribe(status => {
       self.status = status[1];
-      console.log(self.status);
       this.chRef.markForCheck();
-    })  
-    
+    })
+
+  }
+
+  changeStatus(statusAtual) {
+    var obj = {
+      status: statusAtual
+    }
+    this.db.object("SystemParameter")
+      .update(obj).then((t: any) => console.log('dados alterados: ' + statusAtual)),
+      (e: any) => console.log(e.message);
+
   }
 
   logout() {
@@ -58,6 +67,6 @@ export class AppComponent {
     this.authGuard.mostrarMenuEmitter.subscribe(
       mostrar => this.mostrarMenu = mostrar
     );
-  
+
   }
 }

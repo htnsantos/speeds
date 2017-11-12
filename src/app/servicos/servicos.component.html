@@ -4,23 +4,28 @@
     <app-servicos-list></app-servicos-list>
   </div>
 
-  <!--h2 class="col-lg-offset-1">Cadastro de Motoristas</h2-->
-  <div class="col-md-8">
-  <form #f="ngForm" (submit)="cadastrarMotorista(f)">
-    <div class="col-lg-8 col-lg-offset-1 detail-cad-motorista">
-      <div class="form-group">
-        <label for="nome">Nome do Motorista:</label>
-        <input type="text" required class="form-control" ngModel name="nome" placeholder="Nome">
-      </div>
-      <div class="form-group">
-        <label for="telefone">Telefone de Contato:</label>
-        <input type="text" required class="form-control" ngModel name="telefone" placeholder="Telefone de Contato">
-      </div>
-      <br>
+  <div class="col-lg-8 scroll-down">
+  <form #f="ngForm" (submit)="alterarServico(f)">
+    <h3 class="col-lg-offset-1">{{ tipoServico }}</h3>
 
-      <button type="submit" [disabled]="!f.valid"  class="col-lg-6 col-lg-offset-3 btn btn-primary">Cadastrar</button>
+    <div class="col-lg-8 col-lg-offset-1 detail-cad-servico" *ngFor="let s of servicos; let i = index; trackBy:trackByIndex">
+      <div class="form-group">        
+        <input type="text" required class="form-control" [(ngModel)]="servicos[i]" [(value)]="servicos[i]" name="{{i}}">
+      </div>
     </div>
 
+    <div class="col-lg-8 col-lg-offset-1" *ngIf="servicos.length > 0">
+      <div class="form-group">  
+          <input type="text" required class="form-control valor_base" [(ngModel)]="valor_base" name="valor_base">
+          <input type="text" required class="form-control valor_km" [(ngModel)]="valor_km" name="valor_km">
+      </div>    
+    </div>
+    
+    <div class="col-lg-8  margin-botoes" style="margin-bottom: 8%;">
+        <button type="submit" [disabled]="!f.valid" *ngIf="servicos.length > 0" class="col-md-4 btn btn-primary col-lg-offset-2">Cadastrar</button>
+        <button type="button" *ngIf="servicos.length > 0" (click)="limparCampos(f)" class="col-md-4 col-lg-offset-2 btn btn-danger">Cancelar</button>
+    </div>
   </form>
   </div>
 </div>
+<br>

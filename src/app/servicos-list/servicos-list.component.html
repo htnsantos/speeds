@@ -1,4 +1,4 @@
 <li *ngFor="let s of servicos" class="list-group-item color-list">
 
-  <a class="list-motoristas detail-list" > {{ s }}</a>
+  <a class="list-motoristas detail-list" (click)="servicoSelecionado(s)"> {{ s }}</a>
 </li>

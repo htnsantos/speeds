@@ -9,7 +9,7 @@
         <div class="form-group">
           <label for="nome">Veículos:</label>
           <select [(ngModel)]="veiculo" class="form-control" id="nome" name="veiculo" required>
-              <option *ngFor="let c of carros | async" [ngValue]="c">{{ c.veiculo_speed }} - {{ c.veiculo_placa }}</option>
+              <option *ngFor="let c of carros | async" [ngValue]="c">Modelo: {{ c.veiculo_speed }} - Placa: {{ c.veiculo_placa }}</option>
           </select>
         </div>
         <br>

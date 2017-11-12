@@ -18,3 +18,8 @@
 .font-navheader > a {
     font-size: 14px;
 }
+
+.dropdown-status {
+    float: right;
+    margin-top: 15px;
+}

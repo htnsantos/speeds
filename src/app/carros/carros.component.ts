@@ -49,6 +49,11 @@ export class CarrosComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
+  limparCampos(formData) {
+    formData.form.controls.veiculo_speed.setValue('');
+    formData.form.controls.veiculo_placa.setValue('');
+  }
+
   updateItem(key: string, value: any, formData): void {
     this.angularFire.object("SpeedVehicles/" + key)
       .update(value).then((t: any) => {

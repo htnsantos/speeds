@@ -22,9 +22,6 @@ export class ChamadosHistoricoComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase, private user: UsersComponent, private ref: ChangeDetectorRef) {
 
-    var data = new Date();
-    data.setDate(data.getDate() - 1);
-
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
@@ -38,19 +35,29 @@ export class ChamadosHistoricoComponent implements OnInit {
     this.chamados.subscribe(historico => {
       historico.forEach(hist => {
         for (var key in hist) {
-          if (hist.hasOwnProperty(key) && hist[key].data_solicitacao && hist[key].data_solicitacao.startsWith(data.toLocaleDateString())) {
+          if (hist.hasOwnProperty(key) && hist[key].data_solicitacao && 
+            this.isDateMoreThan(hist[key].data_solicitacao)) {
             this.historicos.push(hist[key]);
           }
         }
 
       })
      
-      console.log(this.historicos);
-      this.empty = historico.length == 0;
+      this.empty = this.historicos.length == 0;
       this.ref.markForCheck();
     }
     )
 
+  }
+
+  isDateMoreThan(dataSolicitacao) {
+
+    var yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+    var data = dataSolicitacao.substr(0, dataSolicitacao.length - 3)
+    var arr = data.split("/");
+    var dt = [arr[1], arr[0], arr[2]].join("/");
+
+    return new Date(dt).getTime() > yesterday.getTime();
   }
 
   chamadoSelecionado(chamado) {
