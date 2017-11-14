@@ -1,0 +1,32 @@
+<div class="cor-fundo scroll-down">
+    <div class="form-inline" style="margin-top: 1%">
+        <label for="telefone">Nome do Serviço:</label>
+        <input type="text" class="form-control" [(ngModel)]="id" name="id" placeholder="Número da Solicitação">
+        <input type="date" class="form-control" [(ngModel)]="data" name="data" placeholder="Data da Solicitação">
+    </div>
+    <!--li *ngFor="let c of historicos | filter: id: data" class="list-group-item list">
+    
+        <a class="list-chamado" (click)="chamadoSelecionado(c)"> 
+          {{ c.id }} {{ c.solicitante }} {{ c.data_solicitacao }} {{ c.orcamento }} </a>
+    </li-->
+
+    <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th>Número da Solicitação</th>
+            <th>Nome do Solicitante</th>
+            <th>Data de Solicitação</th>
+            <th>Valor do Orçamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of historicos | filter: id: data; let i = index"  (click)="setClickedRow(i, c)" [class.active]="i == selectedRow">
+            <td>{{ c.id }}</td> 
+            <td>{{ c.solicitante }}</td> 
+            <td>{{ c.data_solicitacao }}</td> 
+            <td>R$ {{ c.orcamento | number:'.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>

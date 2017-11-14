@@ -40,6 +40,9 @@ import { ServicosComponent } from './servicos/servicos.component';
 import { CarrosListComponent } from './carros-list/carros-list.component';
 import { ServicosListComponent } from './servicos-list/servicos-list.component';
 import { ModalCadastrarServicosComponent } from './modal-cadastrar-servicos/modal-cadastrar-servicos.component';
+import { ConsultaChamadosComponent } from './consulta-chamados/consulta-chamados.component';
+//import { DataFilterPipe } from "./componentes/filterPipe";
+import { FilterPipe } from "./componentes/filterPipe";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -76,7 +79,8 @@ export const firebaseConfig = {
     CarrosListComponent,
     ServicosListComponent,
     ModalCadastrarServicosComponent,
-    
+    ConsultaChamadosComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -102,7 +106,8 @@ export const firebaseConfig = {
     ModalCancelarComponent, 
     ModalConcluirComponent,
     ModalInfoComponent,
-    UsersService
+    UsersService,
+    //DataFilterPipe
     
   ],
     

@@ -1,0 +1,15 @@
+.cor-fundo {
+    background: white;
+    height: 100%;
+    margin-bottom: 15px;
+}
+
+.scroll-down {
+    height:  600px;
+    overflow-y: auto;    
+}
+
+.table tr.active td {
+  background-color:#204d74 !important;
+  color: white;
+}
