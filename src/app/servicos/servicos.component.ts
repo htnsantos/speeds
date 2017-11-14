@@ -1,5 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+
+import { Component, OnInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { AngularFireDatabase } from "angularfire2/database";
+import { DialogService } from "ng2-bootstrap-modal";
+import { ModalCadastrarServicosComponent } from "../modal-cadastrar-servicos/modal-cadastrar-servicos.component";
 
 @Component({
   selector: 'app-servicos',
@@ -12,8 +15,10 @@ export class ServicosComponent implements OnInit {
   tipoServico: any;
   valor_base: any;
   valor_km: any;
+   EventEmitter 
 
-  constructor(private cdRef: ChangeDetectorRef, private angularFire: AngularFireDatabase) { }
+  constructor(private cdRef: ChangeDetectorRef, private angularFire: AngularFireDatabase,
+              private dialogService: DialogService) { }
 
   carregaServicos(servicos, tipoServico) {
 
@@ -23,6 +28,15 @@ export class ServicosComponent implements OnInit {
     this.valor_km = servicos.valor_km;
 
     this.cdRef.detectChanges();
+  }
+
+  cadastrarServico() {
+
+    let disposable = this.dialogService.addDialog(ModalCadastrarServicosComponent, {
+      title: this.tipoServico,
+      message: '',
+    })
+
   }
 
   alterarServico(formData) {
@@ -40,6 +54,21 @@ export class ServicosComponent implements OnInit {
     obj["valor_km"] = form.valor_km.value;
 
     this.updateItem(this.tipoServico, obj, formData);
+  }
+
+  removerServico(key) {
+    
+    this.servicos.splice(key, 1);
+    var obj = {
+      checklist: this.servicos
+    }
+        
+    this.angularFire.object("SystemParameter/services/" + this.tipoServico)
+      .update(obj).then((t: any) => {
+        console.log("Item excluido com sucesso");
+        this.cdRef.detectChanges();
+      }),
+      (e: any) => console.log(e.message);
   }
 
   updateItem(key: string, value: any, formData): void {

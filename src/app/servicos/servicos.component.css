@@ -30,3 +30,16 @@ label {
 .valor_km {
     margin-top: 30px;
 }
+
+.remove {
+    float: right;
+    margin-top: -33px;
+    color: red;
+    text-decoration: none;
+}
+
+.btn-cadastrar {
+    float: right;
+    top: 20px;
+    right: 260px;
+}

@@ -39,6 +39,7 @@ import { CarrosComponent } from './carros/carros.component';
 import { ServicosComponent } from './servicos/servicos.component';
 import { CarrosListComponent } from './carros-list/carros-list.component';
 import { ServicosListComponent } from './servicos-list/servicos-list.component';
+import { ModalCadastrarServicosComponent } from './modal-cadastrar-servicos/modal-cadastrar-servicos.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -74,6 +75,7 @@ export const firebaseConfig = {
     ServicosComponent,
     CarrosListComponent,
     ServicosListComponent,
+    ModalCadastrarServicosComponent,
     
   ],
   imports: [
@@ -109,7 +111,8 @@ export const firebaseConfig = {
     ModalCancelarComponent, 
     ModalConcluirComponent, 
     ModalInfoComponent,
-    ModalMotoristaCarComponent
+    ModalMotoristaCarComponent,
+    ModalCadastrarServicosComponent
   ],
   bootstrap: [AppComponent]
 })

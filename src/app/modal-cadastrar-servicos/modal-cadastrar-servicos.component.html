@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <form #f="ngForm" (submit)="cadastrar(f)">
+      <div class="modal-header">
+        <h4 class="modal-title">Cadastrar Serviço ( {{ title }} )</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <div class="form-group">
+              <label for="telefone">Nome do Serviço:</label>
+              <input type="text" required class="form-control" [(ngModel)]="nome" name="nome" placeholder="Nome do Serviço">
+          </div>
+          <br>
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <div class="col-md-3 pull-right">
+          <button type="button" class="btn btn-danger" (click)="close()">Fechar</button>
+        </div>
+        <div class="col-md-3 pull-right">
+          <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Confirmar</button>
+        </div>        
+      </div>
+    </form>
+  </div>
+</div>

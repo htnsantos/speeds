@@ -5,19 +5,22 @@
   </div>
 
   <div class="col-lg-8 scroll-down">
+    <button type="button" *ngIf="servicos.length > 0" (click)="cadastrarServico()" 
+      class="btn btn-default btn-cadastrar col-lg-2"><span class="glyphicon glyphicon-plus"></span></button>
   <form #f="ngForm" (submit)="alterarServico(f)">
     <h3 class="col-lg-offset-1">{{ tipoServico }}</h3>
 
     <div class="col-lg-8 col-lg-offset-1 detail-cad-servico" *ngFor="let s of servicos; let i = index; trackBy:trackByIndex">
       <div class="form-group">        
-        <input type="text" required class="form-control" [(ngModel)]="servicos[i]" [(value)]="servicos[i]" name="{{i}}">
+        <input type="text" required class="form-control" [(ngModel)]="servicos[i]" style="width:95% !important"
+        [(value)]="servicos[i]" name="{{i}}"><a  (click)="removerServico(i)" class="remove glyphicon glyphicon-remove"></a>
       </div>
     </div>
 
     <div class="col-lg-8 col-lg-offset-1" *ngIf="servicos.length > 0">
       <div class="form-group">  
-          <input type="text" required class="form-control valor_base" [(ngModel)]="valor_base" name="valor_base">
-          <input type="text" required class="form-control valor_km" [(ngModel)]="valor_km" name="valor_km">
+          <input type="text" required class="form-control valor_base" [(ngModel)]="valor_base" style="width:95% !important" name="valor_base">
+          <input type="text" required class="form-control valor_km" [(ngModel)]="valor_km" style="width:95% !important" name="valor_km">
       </div>    
     </div>
     
