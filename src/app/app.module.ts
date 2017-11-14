@@ -108,7 +108,7 @@ export const firebaseConfig = {
     ModalInfoComponent,
     UsersService,
     //DataFilterPipe
-    
+    FilterPipe
   ],
     
   entryComponents: [

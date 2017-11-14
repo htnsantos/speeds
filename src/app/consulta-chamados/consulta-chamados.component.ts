@@ -1,5 +1,6 @@
+import { FilterPipe } from './../componentes/filterPipe';
 
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, SimpleChanges, IterableDiffers } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -21,9 +22,12 @@ export class ConsultaChamadosComponent implements OnInit {
   selectedRow: any;
   id: any;
   data: any;
+  totalOrcamento: any = 0;
+  differ : any;
 
-  constructor(private db: AngularFireDatabase, private ref: ChangeDetectorRef) {
+  constructor(private db: AngularFireDatabase, private ref: ChangeDetectorRef, differs: IterableDiffers, private filter: FilterPipe) {
 
+    this.differ = differs.find([]).create(null);
     this.size$ = new BehaviorSubject(null);
 
     this.chamados = this.size$.switchMap(size =>
@@ -61,12 +65,26 @@ export class ConsultaChamadosComponent implements OnInit {
     return new Date(dt).getTime() > yesterday.getTime();
   }
 
+  calcularTotalOrcamento(){
+    let total = parseFloat("0");
+    let items = this.filter.transform(this.historicos,this.id, this.data);
+    
+    for(let i in items) {
+      total = total + items[i].orcamento;
+    }
+    this.totalOrcamento = total;
+  }
+
   setClickedRow(index, chamado) {
     this.selectedRow = index;
     console.log(chamado);
   }
 
   ngOnInit() {
+  }
+  
+  ngDoCheck() {
+    this.calcularTotalOrcamento();
   }
 
 }
