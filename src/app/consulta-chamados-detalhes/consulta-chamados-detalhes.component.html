@@ -1,0 +1,78 @@
+<div class="col-md-12 cor-fundo-solicitacao scroll-down-chamado">
+
+  <div class="col-md-12 info-chamado">
+    <div class="row">
+      <label class="font-chamado-label dist-solicitante"> Número do chamado: </label> <a class="font-chamado-value">{{chamado.id}}</a>
+    </div>
+    <div class="row">
+      <label class="font-chamado-label dist-solicitante"> Solicitante: </label> <a class="font-chamado-value">{{chamado.solicitante}}</a>
+    </div>
+    <div class="row">
+      <label class="font-chamado-label dist-solicitante"> Modelo: </label> <a class="font-chamado-value">{{ chamado.car}}</a>
+    </div>
+    <div class="row">
+      <label class="font-chamado-label dist-solicitante"> Placa: </label> <a class="font-chamado-value">{{chamado.placa}}</a>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <label class="font-chamado-label"> Data da Solicitação: </label> <a class="font-chamado-value">{{chamado.data_solicitacao}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Tempo de Assistência: </label> <a class="font-chamado-value">{{chamado.tempo_estimado}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Motorista Designado: </label> <a class="font-chamado-value">{{chamado.driver}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Celular do Motorista: </label> <a class="font-chamado-value">{{chamado.driver_cel}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Tipo: </label> <a class="font-chamado-value">{{chamado.type}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Status: </label> <a class="font-chamado-value">{{chamado.status }}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Local de Retirada: </label> <a class="font-chamado-value">{{chamado.local_retirada}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Local de Destino: </label> <a class="font-chamado-value">{{chamado.local_destino}}</a>
+      </div>
+      <div class="row">
+        <label class="font-chamado-label"> Orçamento: </label> <a class="font-chamado-value">{{chamado.orcamento | currency:'USD':true:'1.2-2'}}</a>
+      </div>
+    </div>
+    <div class="col-md-4 info-picture">
+      <div class="row">
+        <img src="{{ chamado.picture }}" />
+      </div>
+    </div>
+
+    <div class="col-md-8 info-mapTable table-responsive customScroll" >
+      <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of chamado.condicoes; let i = index" [attr.data-index]="i">
+            <td>{{i + 1}}</td>
+            <td>{{c}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4 info-mapTable">
+      <div class="row">
+        <app-map></app-map>
+      </div>
+    </div>
+
+    <div class="col-md-12 margin-botoes">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-danger" style="margin-bottom: 23%;" (click)="voltar()">Voltar</button>
+      </div>
+    </div>

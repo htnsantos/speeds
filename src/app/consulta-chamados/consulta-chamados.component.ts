@@ -1,3 +1,5 @@
+import { ConsultaChamadosDetalhesComponent } from './../consulta-chamados-detalhes/consulta-chamados-detalhes.component';
+import { EventEmitter } from '@angular/core';
 import { FilterPipe } from './../componentes/filterPipe';
 
 import { Component, OnInit, ChangeDetectorRef, SimpleChanges, IterableDiffers } from '@angular/core';
@@ -7,6 +9,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase/app';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-consulta-chamados',
@@ -24,8 +27,11 @@ export class ConsultaChamadosComponent implements OnInit {
   data: any;
   totalOrcamento: any = 0;
   differ : any;
-
-  constructor(private db: AngularFireDatabase, private ref: ChangeDetectorRef, differs: IterableDiffers, private filter: FilterPipe) {
+  toggle = [];
+  
+  constructor(private db: AngularFireDatabase, private ref: ChangeDetectorRef, 
+    differs: IterableDiffers, private filter: FilterPipe, private router: Router, 
+    private consultaDetalhes: ConsultaChamadosDetalhesComponent) {
 
     this.differ = differs.find([]).create(null);
     this.size$ = new BehaviorSubject(null);
@@ -77,7 +83,8 @@ export class ConsultaChamadosComponent implements OnInit {
 
   setClickedRow(index, chamado) {
     this.selectedRow = index;
-    console.log(chamado);
+    //this.consultaDetalhes.carregaDetalhesChamado(chamado);
+    this.router.navigate(['/consulta-detalhes', chamado.id]);
   }
 
   ngOnInit() {

@@ -43,6 +43,7 @@ import { ModalCadastrarServicosComponent } from './modal-cadastrar-servicos/moda
 import { ConsultaChamadosComponent } from './consulta-chamados/consulta-chamados.component';
 //import { DataFilterPipe } from "./componentes/filterPipe";
 import { FilterPipe } from "./componentes/filterPipe";
+import { ConsultaChamadosDetalhesComponent } from './consulta-chamados-detalhes/consulta-chamados-detalhes.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDDccmvaNyNMMXNTafEzdkPYh0Ym40jQZo",
@@ -80,7 +81,8 @@ export const firebaseConfig = {
     ServicosListComponent,
     ModalCadastrarServicosComponent,
     ConsultaChamadosComponent,
-    FilterPipe
+    FilterPipe,
+    ConsultaChamadosDetalhesComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +110,8 @@ export const firebaseConfig = {
     ModalInfoComponent,
     UsersService,
     //DataFilterPipe
-    FilterPipe
+    FilterPipe,
+    ConsultaChamadosDetalhesComponent
   ],
     
   entryComponents: [

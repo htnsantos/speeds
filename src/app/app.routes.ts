@@ -1,3 +1,4 @@
+import { ConsultaChamadosDetalhesComponent } from './consulta-chamados-detalhes/consulta-chamados-detalhes.component';
 import { ConsultaChamadosComponent } from './consulta-chamados/consulta-chamados.component';
 import { ServicosComponent } from './servicos/servicos.component';
 import { CarrosComponent } from './carros/carros.component';
@@ -17,9 +18,10 @@ export const router: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'motoristas', component: MotoristasComponent, canActivate: [AuthGuard] },
     { path: 'carros', component: CarrosComponent, canActivate: [AuthGuard] },
-    { path: 'consultas', component: ConsultaChamadosComponent, canActivate: [AuthGuard] },
+    { path: 'consulta', component: ConsultaChamadosComponent, canActivate: [AuthGuard] },
     { path: 'servicos', component: ServicosComponent, canActivate: [AuthGuard] },
-    { path: 'users', component: UsersComponent, canActivate: [AuthGuard] }
+    { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+    { path : 'consulta-detalhes/:id', component: ConsultaChamadosDetalhesComponent, canActivate: [AuthGuard]}
 
 ]
 
